@@ -10,8 +10,8 @@ def create():
         longitude = data['home']['geopoint']['longitude']
         latitude = data['home']['geopoint']['latitude']
         altitude = data['home']['geopoint']['altitude']
-        os.system('dronekit-sitl copter --home=' + latitude + ','
-        + longitude + ',' + altitude + ',1 --instance=' + instance)
+        os.system('dronekit-sitl copter --home=' + str(latitude) + ','
+        + str(longitude) + ',' + str(altitude) + ',1 --instance=' + str(instance))
         return 'OK', 200
     return 'Error', 404
 
@@ -25,16 +25,16 @@ def mission():
         geopoints = data['mission']['geopoints']
         mission = ''
         for point in range(len(geopoints)):
-            mission += geopoints[point]['latitude']
+            mission += str(geopoints[point]['latitude'])
             mission += ' '
-            mission += geopoints[point]['longitude']
+            mission += str(geopoints[point]['longitude'])
             mission += ' '
-            mission += geopoints[point]['altitude']
+            mission += str(geopoints[point]['altitude'])
             mission += ' '
         print mission
-        os.system('python mission.py --id ' + ident
-        + ' --intervention ' + intervention + ' --instance' + instance
-        + ' --mission' + mission)
+        os.system('python mission.py --id ' + str(ident)
+        + ' --intervention ' + str(intervention) + ' --instance' + str(instance)
+        + ' --mission' + str(mission))
         return 'OK', 200
     return 'Error', 404
 
